@@ -15,20 +15,22 @@ export function TodoBoard() {
   useEffect(() => reset, [reset]);
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-10 md:py-16">
-      <header className="mb-10 text-center md:mb-14">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-stone-400">
+    <div className="mx-auto max-w-6xl px-5 py-10 md:px-8 md:py-14">
+      <header className="mb-10 md:mb-12">
+        <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-400">
           Produce Sorting Game
         </p>
-        <h1 className="font-display text-4xl font-semibold text-ink md:text-5xl">Fresh Sort</h1>
-        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-stone-500">
-          Click a card in the main basket to sort it into the right bin. Items return home after 5
+        <h1 className="text-4xl font-bold tracking-tight text-ink md:text-5xl">Fresh Sort</h1>
+        <p className="mt-2 max-w-md text-sm leading-relaxed text-stone-500 md:text-base">
+          Tap a card to sort it into the right basket. It hops back to the main list after 5
           seconds.
         </p>
       </header>
 
-      <div className="grid gap-6 md:grid-cols-3">
-        <Column title="Main List" items={mainList} onItemClick={moveToColumn} />
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:auto-rows-min">
+        <div className="md:col-span-2 md:row-span-2">
+          <Column title="Main List" items={mainList} onItemClick={moveToColumn} />
+        </div>
         <Column title="Fruit" items={fruitColumn} onItemClick={returnToMain} />
         <Column title="Vegetable" items={vegetableColumn} onItemClick={returnToMain} />
       </div>

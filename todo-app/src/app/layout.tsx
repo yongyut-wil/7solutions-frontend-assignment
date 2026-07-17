@@ -1,22 +1,20 @@
 import type { Metadata } from 'next';
-import { Fraunces, Outfit } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
-const fraunces = Fraunces({
-  variable: '--font-fraunces',
+const geistSans = Geist({
+  variable: '--font-geist-sans',
   subsets: ['latin'],
-  weight: ['400', '600', '700'],
 });
 
-const outfit = Outfit({
-  variable: '--font-outfit',
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
 });
 
 export const metadata: Metadata = {
   title: 'Fresh Sort',
-  description: 'A tiny demo of state architecture with Zustand and Next.js.',
+  description: 'A tiny produce sorting game built with Next.js, Zustand and Motion.',
 };
 
 export default function RootLayout({
@@ -25,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${outfit.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-body text-ink">{children}</body>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col font-sans text-ink">{children}</body>
     </html>
   );
 }

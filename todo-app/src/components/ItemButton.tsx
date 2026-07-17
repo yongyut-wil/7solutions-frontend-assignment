@@ -1,5 +1,7 @@
 'use client';
 
+import { motion } from 'motion/react';
+import { Orange, Carrot } from '@phosphor-icons/react';
 import type { TodoItem } from '@/data/items';
 
 interface ItemButtonProps {
@@ -9,81 +11,60 @@ interface ItemButtonProps {
 
 const typeStyles = {
   Fruit: {
-    border: 'border-fruit/20',
+    border: 'border-fruit/30',
     bg: 'bg-fruit-soft',
     text: 'text-fruit',
     badge: 'bg-fruit text-white',
+    icon: Orange,
   },
   Vegetable: {
-    border: 'border-vegetable/20',
+    border: 'border-vegetable/30',
     bg: 'bg-vegetable-soft',
-    text: 'text-sage',
+    text: 'text-vegetable',
     badge: 'bg-vegetable text-white',
+    icon: Carrot,
   },
 };
 
-function TypeIcon({ type }: { type: TodoItem['type'] }) {
-  if (type === 'Fruit') {
-    return (
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        className="h-4 w-4"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 3c0 0 2-2 4-1" strokeLinecap="round" />
-        <path d="M12 12 8 8" strokeLinecap="round" />
-      </svg>
-    );
-  }
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="h-4 w-4"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <path d="M12 2c-4 4-8 8-8 12 0 3 3 6 8 6s8-3 8-6c0-4-4-8-8-12z" />
-      <path d="M12 8v10" strokeLinecap="round" />
-      <path d="M12 12c-2 2-2 5 0 8" strokeLinecap="round" />
-      <path d="M12 12c2 2 2 5 0 8" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 export function ItemButton({ item, onClick }: ItemButtonProps) {
   const styles = typeStyles[item.type];
+  const Icon = styles.icon;
 
   return (
-    <button
+    <motion.button
       type="button"
       onClick={() => onClick(item)}
+      layout
+      initial={{ opacity: 0, scale: 0.96, y: 12 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.96, y: -8 }}
+      transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+      whileHover={{ y: -2, boxShadow: '0 8px 24px rgba(0,0,0,0.06)' }}
+      whileTap={{ scale: 0.97 }}
       className={`
-        group relative flex w-full animate-pop-in items-center justify-between
-        overflow-hidden rounded-2xl border bg-card px-4 py-3.5 text-left shadow-sm
-        transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md
-        active:scale-[0.98] active:shadow-inner
-        ${styles.border} ${styles.bg}
+        group relative flex w-full items-center justify-between gap-3
+        overflow-hidden rounded-2xl border-2 bg-card px-4 py-3.5 text-left
+        shadow-sm outline-none transition-shadow duration-200 focus-visible:ring-2 focus-visible:ring-accent/50
+        ${styles.border}
       `}
       aria-label={`${item.name} (${item.type})`}
     >
-      <span className="animate-shimmer pointer-events-none absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100" />
-      <span className="relative font-medium text-ink">{item.name}</span>
+      <div className="flex items-center gap-3">
+        <span className={`inline-flex h-9 w-9 items-center justify-center rounded-xl ${styles.bg}`}>
+          <Icon weight="duotone" className={`h-5 w-5 ${styles.text}`} aria-hidden="true" />
+        </span>
+        <span className="font-semibold text-ink">{item.name}</span>
+      </div>
+
       <span
         className={`
-          relative inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold
-          uppercase tracking-wide transition-transform group-hover:scale-105
+          inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-bold
+          uppercase tracking-wider text-white
           ${styles.badge}
         `}
       >
-        <TypeIcon type={item.type} />
         {item.type}
       </span>
-    </button>
+    </motion.button>
   );
 }

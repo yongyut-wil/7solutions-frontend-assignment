@@ -1,17 +1,16 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #fbf7f2;
-  --foreground: #2a2420;
+  --background: #f7f7f5;
+  --foreground: #1e1e24;
   --card: #ffffff;
-  --muted: #e7e2dc;
-  --fruit: #fb923c;
-  --fruit-soft: #fff3e6;
-  --vegetable: #84cc16;
-  --vegetable-soft: #f3fae3;
-  --ink: #2a2420;
-  --tangerine: #f97316;
-  --sage: #65a30d;
+  --muted: #e9e9e7;
+  --ink: #1e1e24;
+  --fruit: #ff6b6b;
+  --fruit-soft: #fff0f0;
+  --vegetable: #2ec4b6;
+  --vegetable-soft: #e8faf8;
+  --accent: #5b5bd6;
 }
 
 @theme inline {
@@ -19,36 +18,34 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-muted: var(--muted);
+  --color-ink: var(--ink);
   --color-fruit: var(--fruit);
   --color-fruit-soft: var(--fruit-soft);
   --color-vegetable: var(--vegetable);
   --color-vegetable-soft: var(--vegetable-soft);
-  --color-ink: var(--ink);
-  --color-tangerine: var(--tangerine);
-  --color-sage: var(--sage);
-  --font-sans: var(--font-outfit);
-  --font-body: var(--font-outfit);
-  --font-display: var(--font-fraunces);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 body {
-  background: radial-gradient(1200px 600px at 50% -10%, #fff8f0 0%, var(--background) 50%);
+  background:
+    radial-gradient(1000px 500px at 10% 0%, rgba(255, 107, 107, 0.06) 0%, transparent 60%),
+    radial-gradient(800px 400px at 90% 0%, rgba(46, 196, 182, 0.06) 0%, transparent 60%),
+    var(--background);
   color: var(--foreground);
-  font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
-.font-display {
-  font-family: var(--font-fraunces), Georgia, serif;
-}
-
-.font-body {
-  font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+.font-mono {
+  font-family:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 @keyframes pop-in {
   0% {
     opacity: 0;
-    transform: scale(0.96) translateY(8px);
+    transform: scale(0.96) translateY(12px);
   }
   100% {
     opacity: 1;
@@ -57,25 +54,5 @@ body {
 }
 
 .animate-pop-in {
-  animation: pop-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.animate-shimmer {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.4) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2.5s infinite linear;
+  animation: pop-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
