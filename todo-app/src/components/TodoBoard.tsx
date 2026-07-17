@@ -15,13 +15,15 @@ export function TodoBoard() {
   useEffect(() => reset, [reset]);
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8">
-      <header className="mb-8 text-center">
-        <h1 className="text-3xl font-semibold tracking-tight text-stone-800">
-          Auto Delete Todo List
-        </h1>
-        <p className="mt-2 text-sm text-stone-500">
-          Click an item to move it. It returns to the main list after 5 seconds.
+    <div className="mx-auto max-w-6xl px-6 py-10 md:py-16">
+      <header className="mb-10 text-center md:mb-14">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-stone-400">
+          Produce Sorting Game
+        </p>
+        <h1 className="font-display text-4xl font-semibold text-ink md:text-5xl">Fresh Sort</h1>
+        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-stone-500">
+          Click a card in the main basket to sort it into the right bin. Items return home after 5
+          seconds.
         </p>
       </header>
 

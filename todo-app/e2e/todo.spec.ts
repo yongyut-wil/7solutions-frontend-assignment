@@ -9,6 +9,10 @@ function getAppleButton(page: Page) {
   return page.getByRole('button', { name: 'Apple (Fruit)', exact: true });
 }
 
+function getRegion(page: Page, name: string) {
+  return page.getByRole('region', { name, exact: true });
+}
+
 test('moves a fruit to the Fruit column and returns to the bottom of the main list after 5 seconds', async ({
   page,
 }) => {
@@ -17,20 +21,20 @@ test('moves a fruit to the Fruit column and returns to the bottom of the main li
 
   await apple.click();
   await expect(
-    page.locator('section:has-text("Fruit") [aria-label="Apple (Fruit)"]')
+    getRegion(page, 'Fruit').getByRole('button', { name: 'Apple (Fruit)', exact: true })
   ).toBeVisible();
   await expect(
-    page.locator('section:has-text("Main List") [aria-label="Apple (Fruit)"]')
+    getRegion(page, 'Main List').getByRole('button', { name: 'Apple (Fruit)', exact: true })
   ).toHaveCount(0);
 
   await page.clock.runFor(5000);
 
   await expect(
-    page.locator('section:has-text("Main List") [aria-label="Apple (Fruit)"]')
+    getRegion(page, 'Main List').getByRole('button', { name: 'Apple (Fruit)', exact: true })
   ).toBeVisible();
-  await expect(page.locator('section:has-text("Fruit") [aria-label="Apple (Fruit)"]')).toHaveCount(
-    0
-  );
+  await expect(
+    getRegion(page, 'Fruit').getByRole('button', { name: 'Apple (Fruit)', exact: true })
+  ).toHaveCount(0);
 });
 
 test('returns a column item immediately when clicked and cancels the auto-return timer', async ({
@@ -38,16 +42,18 @@ test('returns a column item immediately when clicked and cancels the auto-return
 }) => {
   await getAppleButton(page).click();
   await expect(
-    page.locator('section:has-text("Fruit") [aria-label="Apple (Fruit)"]')
+    getRegion(page, 'Fruit').getByRole('button', { name: 'Apple (Fruit)', exact: true })
   ).toBeVisible();
 
-  await page.locator('section:has-text("Fruit") [aria-label="Apple (Fruit)"]').click();
+  await getRegion(page, 'Fruit')
+    .getByRole('button', { name: 'Apple (Fruit)', exact: true })
+    .click();
   await expect(
-    page.locator('section:has-text("Main List") [aria-label="Apple (Fruit)"]')
+    getRegion(page, 'Main List').getByRole('button', { name: 'Apple (Fruit)', exact: true })
   ).toBeVisible();
-  await expect(page.locator('section:has-text("Fruit") [aria-label="Apple (Fruit)"]')).toHaveCount(
-    0
-  );
+  await expect(
+    getRegion(page, 'Fruit').getByRole('button', { name: 'Apple (Fruit)', exact: true })
+  ).toHaveCount(0);
 
   await page.clock.runFor(5000);
 

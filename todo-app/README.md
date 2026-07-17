@@ -1,6 +1,6 @@
-# Auto Delete Todo List
+# Fresh Sort
 
-A small interactive list demonstrating unidirectional state flow with Zustand inside a Next.js 16 App Router page.
+A small interactive produce-sorting demo demonstrating unidirectional state flow with Zustand inside a Next.js 16 App Router page.
 
 ## Live Demo
 
