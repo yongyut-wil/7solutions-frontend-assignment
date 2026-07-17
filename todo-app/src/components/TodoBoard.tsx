@@ -38,11 +38,11 @@ export function TodoBoard() {
         </div>
       </header>
 
-      <div className="flex flex-col gap-5 md:flex-row">
-        <div className="md:w-2/3">
+      <div className="flex flex-col gap-5 lg:flex-row">
+        <div className="lg:w-2/3">
           <Column title="Main List" items={mainList} onItemClick={moveToColumn} />
         </div>
-        <div className="flex flex-col gap-5 md:w-1/3">
+        <div className="flex flex-col gap-5 lg:w-1/3">
           <Column title="Fruit" items={fruitColumn} onItemClick={returnToMain} />
           <Column title="Vegetable" items={vegetableColumn} onItemClick={returnToMain} />
         </div>

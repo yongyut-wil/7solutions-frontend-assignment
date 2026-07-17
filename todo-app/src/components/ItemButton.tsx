@@ -47,16 +47,18 @@ export function ItemButton({ item, onClick }: ItemButtonProps) {
       `}
       aria-label={`${item.name} (${item.type})`}
     >
-      <div className="flex items-center gap-3">
-        <span className={`inline-flex h-9 w-9 items-center justify-center rounded-xl ${styles.bg}`}>
+      <div className="flex min-w-0 items-center gap-3">
+        <span
+          className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${styles.bg}`}
+        >
           <Icon weight="duotone" className={`h-5 w-5 ${styles.text}`} aria-hidden="true" />
         </span>
-        <span className="font-semibold text-ink">{item.name}</span>
+        <span className="truncate font-semibold text-ink">{item.name}</span>
       </div>
 
       <span
         className={`
-          inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-bold
+          inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1 text-[10px] font-bold
           uppercase tracking-wider text-white
           ${styles.badge}
         `}
