@@ -20,7 +20,6 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 10
-          package_json_file: todo-app/package.json
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -41,6 +40,9 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Build
+        run: pnpm build
+
   user-api:
     runs-on: ubuntu-latest
     defaults:
@@ -54,7 +56,6 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 10
-          package_json_file: user-api/package.json
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
