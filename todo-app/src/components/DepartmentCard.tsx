@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import type { DepartmentSummary } from '@/lib/getGroupedUsers';
 
 interface DepartmentCardProps {
@@ -6,6 +9,7 @@ interface DepartmentCardProps {
 }
 
 export function DepartmentCard({ name, summary }: DepartmentCardProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const hairColors = Object.entries(summary.hair);
   const addressUsers = Object.entries(summary.addressUser);
 
@@ -62,9 +66,9 @@ export function DepartmentCard({ name, summary }: DepartmentCardProps) {
           ))}
         </ul>
         {addressUsers.length > 5 && (
-          <details className="mt-1">
+          <details open={isOpen} onToggle={(e) => setIsOpen(e.currentTarget.open)} className="mt-1">
             <summary className="cursor-pointer list-none text-xs font-medium text-stone-400 outline-none transition hover:text-ink [&::-webkit-details-marker]:hidden">
-              +{addressUsers.length - 5} more
+              {isOpen ? 'Show less' : `+${addressUsers.length - 5} more`}
             </summary>
             <ul className="mt-2 space-y-1 text-sm text-stone-600">
               {addressUsers.slice(5).map(([fullName, postalCode]) => (
