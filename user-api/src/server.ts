@@ -20,6 +20,7 @@ function groupedResultToResponse(data: GroupedResult): GetGroupedUsersResponse {
       ageRange: summary.ageRange,
       hair: summary.hair,
       addressUser: summary.addressUser,
+      addressCities: summary.addressCities,
     });
   }
   return create(GetGroupedUsersResponseSchema, { departments });
@@ -54,6 +55,7 @@ export function buildServer(): FastifyInstance {
                 ageRange: { type: 'string' },
                 hair: { type: 'object', additionalProperties: { type: 'integer' } },
                 addressUser: { type: 'object', additionalProperties: { type: 'string' } },
+                addressCities: { type: 'object', additionalProperties: { type: 'string' } },
               },
             },
           },

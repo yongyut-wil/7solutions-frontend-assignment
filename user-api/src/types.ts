@@ -5,7 +5,7 @@ export interface User {
   gender: string;
   age: number;
   hair: { color: string };
-  address: { postalCode: string };
+  address: { postalCode: string; city: string };
   company: { department: string };
 }
 
@@ -15,6 +15,7 @@ export interface DepartmentSummary {
   ageRange: string;
   hair: Record<string, number>;
   addressUser: Record<string, string>;
+  addressCities: Record<string, string>;
 }
 
 export type GroupedResult = Record<string, DepartmentSummary>;

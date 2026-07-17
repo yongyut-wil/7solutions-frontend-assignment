@@ -10,7 +10,7 @@ function makeUser(overrides: Partial<User> = {}): User {
     gender: 'male',
     age: 50,
     hair: { color: 'Black' },
-    address: { postalCode: '00001' },
+    address: { postalCode: '00001', city: 'New York' },
     company: { department: 'Engineering' },
     ...overrides,
   };
@@ -26,6 +26,7 @@ describe('groupByDepartment', () => {
       ageRange: '50-50',
       hair: { Black: 1 },
       addressUser: { TerryMedhurst: '00001' },
+      addressCities: { TerryMedhurst: 'New York' },
     });
   });
 

@@ -7,6 +7,7 @@ interface Accumulator {
   maxAge: number;
   hair: Map<string, number>;
   addressUser: Map<string, string>;
+  addressCities: Map<string, string>;
 }
 
 export function groupByDepartment(users: User[]): GroupedResult {
@@ -23,6 +24,7 @@ export function groupByDepartment(users: User[]): GroupedResult {
         maxAge: user.age,
         hair: new Map(),
         addressUser: new Map(),
+        addressCities: new Map(),
       };
       groups.set(department, acc);
     }
@@ -35,6 +37,7 @@ export function groupByDepartment(users: User[]): GroupedResult {
 
     acc.hair.set(user.hair.color, (acc.hair.get(user.hair.color) ?? 0) + 1);
     acc.addressUser.set(`${user.firstName}${user.lastName}`, user.address.postalCode);
+    acc.addressCities.set(`${user.firstName}${user.lastName}`, user.address.city);
   }
 
   const result: GroupedResult = {};
@@ -45,12 +48,16 @@ export function groupByDepartment(users: User[]): GroupedResult {
     const addressUser: Record<string, string> = {};
     for (const [name, postalCode] of acc.addressUser) addressUser[name] = postalCode;
 
+    const addressCities: Record<string, string> = {};
+    for (const [name, city] of acc.addressCities) addressCities[name] = city;
+
     result[department] = {
       male: acc.male,
       female: acc.female,
       ageRange: `${acc.minAge}-${acc.maxAge}`,
       hair,
       addressUser,
+      addressCities,
     };
   }
 

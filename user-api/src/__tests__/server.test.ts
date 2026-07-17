@@ -14,7 +14,7 @@ const mockUsers: User[] = [
     gender: 'male',
     age: 50,
     hair: { color: 'Black' },
-    address: { postalCode: '10001' },
+    address: { postalCode: '10001', city: 'New York' },
     company: { department: 'Engineering' },
   },
   {
@@ -24,7 +24,7 @@ const mockUsers: User[] = [
     gender: 'female',
     age: 30,
     hair: { color: 'Blond' },
-    address: { postalCode: '20002' },
+    address: { postalCode: '20002', city: 'Chicago' },
     company: { department: 'Sales' },
   },
 ];
@@ -58,6 +58,7 @@ describe('server', () => {
       ageRange: '50-50',
       hair: { Black: 1 },
       addressUser: { TerryMedhurst: '10001' },
+      addressCities: { TerryMedhurst: 'New York' },
     });
     expect(body.Sales).toEqual({
       male: 0,
@@ -65,6 +66,7 @@ describe('server', () => {
       ageRange: '30-30',
       hair: { Blond: 1 },
       addressUser: { JaneDoe: '20002' },
+      addressCities: { JaneDoe: 'Chicago' },
     });
   });
 

@@ -10,6 +10,7 @@ message DepartmentSummary {
   string age_range = 3;
   map<string, int32> hair = 4;
   map<string, string> address_user = 5;
+  map<string, string> address_cities = 6;
 }
 
 message GetGroupedUsersResponse {
