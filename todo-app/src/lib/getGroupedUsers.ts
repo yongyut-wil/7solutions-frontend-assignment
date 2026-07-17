@@ -6,6 +6,7 @@ export type DepartmentSummary = {
   ageRange: string;
   hair: Record<string, number>;
   addressUser: Record<string, string>;
+  addressCities: Record<string, string>;
 };
 
 export type GroupedUsers = Record<string, DepartmentSummary>;
@@ -24,6 +25,6 @@ export const getGroupedUsers = unstable_cache(
 
     return res.json();
   },
-  ['users-grouped'],
+  ['users-grouped', 'v2'],
   { revalidate: 60, tags: ['users-grouped'] }
 );

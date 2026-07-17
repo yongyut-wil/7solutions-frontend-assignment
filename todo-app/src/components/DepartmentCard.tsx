@@ -11,7 +11,11 @@ interface DepartmentCardProps {
 export function DepartmentCard({ name, summary }: DepartmentCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const hairColors = Object.entries(summary.hair);
-  const addressUsers = Object.entries(summary.addressUser);
+  const addressUsers = Object.entries(summary.addressUser).map(([fullName, postalCode]) => ({
+    fullName,
+    postalCode,
+    city: summary.addressCities[fullName] ?? '',
+  }));
 
   return (
     <section
@@ -58,10 +62,13 @@ export function DepartmentCard({ name, summary }: DepartmentCardProps) {
           Address users
         </p>
         <ul className="mt-2 space-y-1 text-sm text-stone-600">
-          {addressUsers.slice(0, 5).map(([fullName, postalCode]) => (
+          {addressUsers.slice(0, 5).map(({ fullName, postalCode, city }) => (
             <li key={fullName} className="flex justify-between">
               <span className="font-medium text-ink">{fullName}</span>
-              <span className="font-mono text-xs text-stone-400">{postalCode}</span>
+              <span className="text-right">
+                <span className="block font-mono text-xs text-stone-400">{postalCode}</span>
+                {city && <span className="block text-[10px] text-stone-400">{city}</span>}
+              </span>
             </li>
           ))}
         </ul>
@@ -71,10 +78,13 @@ export function DepartmentCard({ name, summary }: DepartmentCardProps) {
               {isOpen ? 'Show less' : `+${addressUsers.length - 5} more`}
             </summary>
             <ul className="mt-2 space-y-1 text-sm text-stone-600">
-              {addressUsers.slice(5).map(([fullName, postalCode]) => (
+              {addressUsers.slice(5).map(({ fullName, postalCode, city }) => (
                 <li key={fullName} className="flex justify-between">
                   <span className="font-medium text-ink">{fullName}</span>
-                  <span className="font-mono text-xs text-stone-400">{postalCode}</span>
+                  <span className="text-right">
+                    <span className="block font-mono text-xs text-stone-400">{postalCode}</span>
+                    {city && <span className="block text-[10px] text-stone-400">{city}</span>}
+                  </span>
                 </li>
               ))}
             </ul>

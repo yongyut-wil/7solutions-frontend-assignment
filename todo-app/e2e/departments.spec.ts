@@ -12,6 +12,7 @@ test.beforeEach(async ({ page }) => {
           ageRange: '50-50',
           hair: { Black: 1 },
           addressUser: { TerryMedhurst: '10001' },
+          addressCities: { TerryMedhurst: 'New York' },
         },
         Sales: {
           male: 0,
@@ -19,6 +20,7 @@ test.beforeEach(async ({ page }) => {
           ageRange: '30-30',
           hair: { Blond: 1 },
           addressUser: { JaneDoe: '20002' },
+          addressCities: { JaneDoe: 'Chicago' },
         },
       }),
     });
@@ -38,6 +40,7 @@ test('displays department summaries fetched from the API', async ({ page }) => {
   await expect(engineering).toContainText('50-50');
   await expect(engineering).toContainText('Black');
   await expect(engineering).toContainText('TerryMedhurst');
+  await expect(engineering).toContainText('New York');
 
   const sales = page.getByRole('region', { name: 'Sales' });
   await expect(sales).toContainText('0');
@@ -45,6 +48,7 @@ test('displays department summaries fetched from the API', async ({ page }) => {
   await expect(sales).toContainText('30-30');
   await expect(sales).toContainText('Blond');
   await expect(sales).toContainText('JaneDoe');
+  await expect(sales).toContainText('Chicago');
 });
 
 test('navigates between Fresh Sort and Departments', async ({ page }) => {
