@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Link from 'next/link';
 import { useTodoStore } from '@/store/todoStore';
 import { Column } from './Column';
 
@@ -20,11 +21,21 @@ export function TodoBoard() {
         <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-400">
           Produce Sorting Game
         </p>
-        <h1 className="text-4xl font-bold tracking-tight text-ink md:text-5xl">Fresh Sort</h1>
-        <p className="mt-2 max-w-md text-sm leading-relaxed text-stone-500 md:text-base">
-          Tap a card to sort it into the right basket. It hops back to the main list after 5
-          seconds.
-        </p>
+        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight text-ink md:text-5xl">Fresh Sort</h1>
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-stone-500 md:text-base">
+              Tap a card to sort it into the right basket. It hops back to the main list after 5
+              seconds.
+            </p>
+          </div>
+          <Link
+            href="/departments"
+            className="inline-flex items-center justify-center rounded-2xl border border-stone-200 bg-card px-5 py-3 text-sm font-semibold text-ink shadow-sm transition hover:bg-stone-50"
+          >
+            View Departments →
+          </Link>
+        </div>
       </header>
 
       <div className="flex flex-col gap-5 md:flex-row">
