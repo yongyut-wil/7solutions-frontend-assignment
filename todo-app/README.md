@@ -26,6 +26,7 @@ From the [7Solutions frontend assignment](https://github.com/7-solutions/fronten
 | Zustand               | 5       | Tiny, unopinionated store with selector-based subscriptions. |
 | Vitest                | 4       | Fast unit tests with fake timers.                            |
 | React Testing Library | 16      | Component tests focused on user behavior.                    |
+| Playwright            | 1       | E2E tests against the real browser with clock mocking.       |
 
 Zustand was chosen over Redux here because the state surface is small; it still demonstrates flux-style unidirectional flow (actions as the single writer to state) without the boilerplate of a larger store.
 
@@ -67,6 +68,20 @@ Open <http://localhost:3000>.
 ```bash
 pnpm test
 ```
+
+## E2E Tests
+
+```bash
+pnpm exec playwright install chromium
+pnpm e2e
+```
+
+Scenarios:
+
+- Move a fruit to the Fruit column and verify it returns to the bottom of the main list after 5 seconds.
+- Click a column item to return it immediately and confirm the auto-return timer is cancelled.
+
+Playwright `page.clock` is used to advance time without real waits.
 
 ## Build
 
