@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom/vitest';
 import { vi } from 'vitest';
+import React from 'react';
 
 function createMotionComponent(tag: string) {
-  const React = require('react');
   const motionPropKeys = new Set([
     'initial',
     'animate',
@@ -38,9 +38,7 @@ function createMotionMock() {
   );
 }
 
-vi.mock('motion/react', async () => {
-  const React = await import('react');
-
+vi.mock('motion/react', () => {
   const motionProxy = createMotionMock();
 
   return {
