@@ -38,12 +38,22 @@ export default function DepartmentsPage() {
         <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-400">
           Backend Integration
         </p>
-        <h1 className="text-4xl font-bold tracking-tight text-ink md:text-5xl">
-          Department Summary
-        </h1>
-        <p className="mt-2 max-w-md text-sm leading-relaxed text-stone-500 md:text-base">
-          Aggregated user stats from dummyjson, grouped by company department.
-        </p>
+        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight text-ink md:text-5xl">
+              Department Summary
+            </h1>
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-stone-500 md:text-base">
+              Aggregated user stats from dummyjson, grouped by company department.
+            </p>
+          </div>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-2xl border border-stone-200 bg-card px-5 py-3 text-sm font-semibold text-ink shadow-sm transition hover:bg-stone-50"
+          >
+            ← Back to Fresh Sort
+          </Link>
+        </div>
       </header>
 
       {error && (
@@ -82,15 +92,6 @@ export default function DepartmentsPage() {
           ))}
         </div>
       )}
-
-      <div className="mt-10">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 rounded-2xl border border-stone-200 bg-card px-5 py-3 text-sm font-semibold text-ink shadow-sm transition hover:bg-stone-50"
-        >
-          ← Back to Fresh Sort
-        </Link>
-      </div>
     </main>
   );
 }

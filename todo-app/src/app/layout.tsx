@@ -13,8 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Fresh Sort',
+  metadataBase: new URL('https://todo-app-iota-steel-32.vercel.app'),
+  title: {
+    default: 'Fresh Sort',
+    template: '%s | Fresh Sort',
+  },
   description: 'A tiny produce sorting game built with Next.js, Zustand and Motion.',
+  applicationName: 'Fresh Sort',
+  keywords: ['Next.js', 'React', 'Zustand', 'Motion', 'produce', 'sorting game'],
+  openGraph: {
+    title: 'Fresh Sort',
+    description: 'A tiny produce sorting game built with Next.js, Zustand and Motion.',
+    url: '/',
+    siteName: 'Fresh Sort',
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
