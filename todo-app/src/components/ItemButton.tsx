@@ -34,13 +34,11 @@ export function ItemButton({ item, onClick }: ItemButtonProps) {
     <motion.button
       type="button"
       onClick={() => onClick(item)}
-      layout
-      initial={{ opacity: 0, scale: 0.96, y: 12 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.96, y: -8 }}
-      transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-      whileHover={{ y: -2, boxShadow: '0 8px 24px rgba(0,0,0,0.06)' }}
-      whileTap={{ scale: 0.97 }}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.2, ease: 'easeOut' }}
+      whileHover={{ boxShadow: '0 8px 24px rgba(0,0,0,0.05)' }}
+      whileTap={{ scale: 0.99 }}
       className={`
         group relative flex w-full items-center justify-between gap-3
         overflow-hidden rounded-2xl border-2 bg-card px-4 py-3.5 text-left

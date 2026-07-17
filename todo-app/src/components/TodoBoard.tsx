@@ -15,7 +15,7 @@ export function TodoBoard() {
   useEffect(() => reset, [reset]);
 
   return (
-    <div className="mx-auto max-w-6xl px-5 py-10 md:px-8 md:py-14">
+    <div className="mx-auto w-full max-w-6xl px-5 py-10 md:px-8 md:py-14">
       <header className="mb-10 md:mb-12">
         <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-400">
           Produce Sorting Game
@@ -27,12 +27,14 @@ export function TodoBoard() {
         </p>
       </header>
 
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:auto-rows-min">
-        <div className="md:col-span-2 md:row-span-2">
+      <div className="flex flex-col gap-5 md:flex-row">
+        <div className="md:w-2/3">
           <Column title="Main List" items={mainList} onItemClick={moveToColumn} />
         </div>
-        <Column title="Fruit" items={fruitColumn} onItemClick={returnToMain} />
-        <Column title="Vegetable" items={vegetableColumn} onItemClick={returnToMain} />
+        <div className="flex flex-col gap-5 md:w-1/3">
+          <Column title="Fruit" items={fruitColumn} onItemClick={returnToMain} />
+          <Column title="Vegetable" items={vegetableColumn} onItemClick={returnToMain} />
+        </div>
       </div>
     </div>
   );

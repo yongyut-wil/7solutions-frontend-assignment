@@ -1,6 +1,5 @@
 'use client';
 
-import { AnimatePresence, motion } from 'motion/react';
 import { Basket, Orange, Carrot } from '@phosphor-icons/react';
 import type { TodoItem } from '@/data/items';
 import { ItemButton } from './ItemButton';
@@ -36,7 +35,7 @@ export function Column({ title, items, onItemClick }: ColumnProps) {
 
   return (
     <section
-      className="flex min-h-[18rem] flex-col rounded-3xl border border-stone-200/70 bg-card/90 p-5 shadow-sm"
+      className="flex w-full min-h-[16rem] flex-col rounded-3xl border border-stone-200/70 bg-card/90 p-5 shadow-sm"
       aria-labelledby={headingId}
     >
       <div className="mb-5 flex items-center justify-between">
@@ -61,24 +60,16 @@ export function Column({ title, items, onItemClick }: ColumnProps) {
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col gap-2.5">
-        <AnimatePresence mode="popLayout" initial={false}>
-          {items.length === 0 ? (
-            <motion.div
-              key="empty"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="flex flex-1 flex-col items-center justify-center rounded-2xl border-2 border-dashed border-stone-200 p-6 text-center"
-            >
-              <Basket weight="thin" className="mb-2 h-8 w-8 text-stone-300" aria-hidden="true" />
-              <p className="text-sm font-medium text-stone-400">Basket empty</p>
-              <p className="mt-1 text-xs text-stone-300">Tap a produce card from the main list.</p>
-            </motion.div>
-          ) : (
-            items.map((item) => <ItemButton key={item.name} item={item} onClick={onItemClick} />)
-          )}
-        </AnimatePresence>
+      <div className="flex min-h-[10rem] flex-1 flex-col gap-2.5">
+        {items.length === 0 ? (
+          <div className="flex flex-1 flex-col items-center justify-center rounded-2xl border-2 border-dashed border-stone-200 p-6 text-center">
+            <Basket weight="thin" className="mb-2 h-8 w-8 text-stone-300" aria-hidden="true" />
+            <p className="text-sm font-medium text-stone-400">Basket empty</p>
+            <p className="mt-1 text-xs text-stone-300">Tap a produce card from the main list.</p>
+          </div>
+        ) : (
+          items.map((item) => <ItemButton key={item.name} item={item} onClick={onItemClick} />)
+        )}
       </div>
     </section>
   );
