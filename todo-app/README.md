@@ -4,7 +4,7 @@ A small interactive list demonstrating unidirectional state flow with Zustand in
 
 ## Live Demo
 
-Deployed on Vercel: <https://todo-app-placeholder.vercel.app>
+Deployed on Vercel: <https://todo-app-iota-steel-32.vercel.app>
 
 ## Requirements
 
