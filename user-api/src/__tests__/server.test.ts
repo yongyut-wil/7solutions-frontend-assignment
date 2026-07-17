@@ -3,7 +3,7 @@ import { createClient } from '@connectrpc/connect';
 import { createConnectTransport } from '@connectrpc/connect-node';
 import { buildServer } from '../server.js';
 import { clearGroupedUsersCache } from '../service.js';
-import { UserGroupService } from '../gen/proto/users_connect.js';
+import { UserGroupService } from '../gen/proto/users_pb.js';
 import type { User } from '../types.js';
 
 const mockUsers: User[] = [

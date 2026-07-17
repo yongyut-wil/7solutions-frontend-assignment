@@ -14,10 +14,10 @@ From the [7Solutions frontend assignment](https://github.com/7-solutions/fronten
 
 | Library     | Version | Why                                                                             |
 | ----------- | ------- | ------------------------------------------------------------------------------- |
-| Fastify     | 4.x     | Fast, schema-based serialization and plugin ecosystem.                          |
+| Fastify     | 5.x     | Fast, schema-based serialization and plugin ecosystem.                          |
 | TypeScript  | 5.x     | Type-safe modules (ESM).                                                        |
-| ConnectRPC  | 1.x     | TS-first RPC that serves gRPC, gRPC-Web, and Connect over the same HTTP routes. |
-| Protobuf-ES | 1.x     | Generated plain-object protobuf types.                                          |
+| ConnectRPC  | 2.x     | TS-first RPC that serves gRPC, gRPC-Web, and Connect over the same HTTP routes. |
+| Protobuf-ES | 2.x     | Generated schema-driven protobuf types.                                         |
 | Vitest      | 4.x     | Fast tests for pure transforms and integration tests.                           |
 
 ## Architecture

@@ -2,16 +2,18 @@ import Fastify, { type FastifyInstance } from 'fastify';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import { type ConnectRouter } from '@connectrpc/connect';
+import { create } from '@bufbuild/protobuf';
 import { fastifyConnectPlugin } from '@connectrpc/connect-fastify';
-import { UserGroupService } from './gen/proto/users_connect.js';
-import { DepartmentSummary, GetGroupedUsersResponse } from './gen/proto/users_pb.js';
+import { UserGroupService } from './gen/proto/users_pb.js';
+import { DepartmentSummarySchema, GetGroupedUsersResponseSchema } from './gen/proto/users_pb.js';
+import type { DepartmentSummary, GetGroupedUsersResponse } from './gen/proto/users_pb.js';
 import { getGroupedUsers } from './service.js';
 import type { GroupedResult } from './types.js';
 
 function groupedResultToResponse(data: GroupedResult): GetGroupedUsersResponse {
   const departments: Record<string, DepartmentSummary> = {};
   for (const [dept, summary] of Object.entries(data)) {
-    departments[dept] = new DepartmentSummary({
+    departments[dept] = create(DepartmentSummarySchema, {
       male: summary.male,
       female: summary.female,
       ageRange: summary.ageRange,
@@ -19,7 +21,7 @@ function groupedResultToResponse(data: GroupedResult): GetGroupedUsersResponse {
       addressUser: summary.addressUser,
     });
   }
-  return new GetGroupedUsersResponse({ departments });
+  return create(GetGroupedUsersResponseSchema, { departments });
 }
 
 export function buildServer(): FastifyInstance {

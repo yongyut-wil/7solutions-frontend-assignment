@@ -7,9 +7,7 @@ managed:
 plugins:
   - local: protoc-gen-es
     out: src/gen
+    include_imports: true
     opt:
       - target=ts
-  - local: protoc-gen-connect-es
-    out: src/gen
-    opt:
-      - target=ts
+      - import_extension=js
