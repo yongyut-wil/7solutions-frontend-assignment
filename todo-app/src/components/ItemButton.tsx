@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'motion/react';
+import * as m from 'motion/react-m';
 import { Orange, Carrot } from '@phosphor-icons/react';
 import type { TodoItem } from '@/data/items';
 
@@ -31,7 +31,7 @@ export function ItemButton({ item, onClick }: ItemButtonProps) {
   const Icon = styles.icon;
 
   return (
-    <motion.button
+    <m.button
       type="button"
       onClick={() => onClick(item)}
       initial={{ opacity: 0, y: 8 }}
@@ -65,6 +65,6 @@ export function ItemButton({ item, onClick }: ItemButtonProps) {
       >
         {item.type}
       </span>
-    </motion.button>
+    </m.button>
   );
 }

@@ -1,9 +1,8 @@
 import '@testing-library/jest-dom/vitest';
 import { vi } from 'vitest';
 
-vi.mock('motion/react', async () => {
-  const React = await import('react');
-
+function createMotionComponent(tag: string) {
+  const React = require('react');
   const motionPropKeys = new Set([
     'initial',
     'animate',
@@ -15,29 +14,41 @@ vi.mock('motion/react', async () => {
     'whileFocus',
     'whileDrag',
   ]);
+  return React.forwardRef(function MockMotion(
+    props: Record<string, unknown>,
+    ref: React.Ref<HTMLElement>
+  ) {
+    const Tag = tag as keyof React.JSX.IntrinsicElements;
+    const rest = Object.fromEntries(
+      Object.entries(props).filter(([key]) => !motionPropKeys.has(key))
+    );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return React.createElement(Tag as any, { ref, ...rest });
+  });
+}
 
-  const motionProxy = new Proxy(
+function createMotionMock() {
+  return new Proxy(
     {},
     {
       get(_, tag: string) {
-        const Component = React.forwardRef(function MockMotion(
-          props: Record<string, unknown>,
-          ref: React.Ref<HTMLElement>
-        ) {
-          const Tag = tag as keyof React.JSX.IntrinsicElements;
-          const rest = Object.fromEntries(
-            Object.entries(props).filter(([key]) => !motionPropKeys.has(key))
-          );
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          return React.createElement(Tag as any, { ref, ...rest });
-        });
-        return Component;
+        return createMotionComponent(tag);
       },
     }
   );
+}
+
+vi.mock('motion/react', async () => {
+  const React = await import('react');
+
+  const motionProxy = createMotionMock();
 
   return {
     motion: motionProxy as typeof import('motion/react').motion,
+    LazyMotion: function LazyMotion({ children }: { children: React.ReactNode }) {
+      return children;
+    },
+    domAnimation: {},
     AnimatePresence: function AnimatePresence({ children }: { children: React.ReactNode }) {
       return children;
     },
@@ -47,5 +58,11 @@ vi.mock('motion/react', async () => {
     MotionConfig: function MotionConfig({ children }: { children: React.ReactNode }) {
       return children;
     },
+  };
+});
+
+vi.mock('motion/react-m', () => {
+  return {
+    button: createMotionComponent('button'),
   };
 });
