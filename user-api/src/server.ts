@@ -1,3 +1,4 @@
+import type { IncomingMessage, ServerResponse } from 'node:http';
 import Fastify, { type FastifyInstance } from 'fastify';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
@@ -77,4 +78,32 @@ export function buildServer(): FastifyInstance {
   });
 
   return fastify;
+}
+
+let app: FastifyInstance | null = null;
+let readyPromise: Promise<void> | null = null;
+
+function getApp(): FastifyInstance {
+  if (!app) {
+    app = buildServer();
+  }
+  return app;
+}
+
+async function prepareApp(): Promise<void> {
+  const instance = getApp();
+  if (!readyPromise) {
+    readyPromise = Promise.resolve(instance.ready()).then(() => undefined);
+  }
+  await readyPromise;
+}
+
+export default async function handler(req: IncomingMessage, res: ServerResponse) {
+  await prepareApp();
+  getApp().server.emit('request', req, res);
+
+  await new Promise<void>((resolve) => {
+    res.on('finish', resolve);
+    res.on('close', resolve);
+  });
 }

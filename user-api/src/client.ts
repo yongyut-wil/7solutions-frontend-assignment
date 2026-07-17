@@ -8,13 +8,20 @@ export interface FetchUsersOptions {
   retries?: number;
 }
 
+interface FetchResponse {
+  ok: boolean;
+  status: number;
+  statusText: string;
+  json(): Promise<unknown>;
+}
+
 export async function fetchUsers(options: FetchUsersOptions = {}): Promise<User[]> {
   const { signal, retries = 1 } = options;
   let lastError: unknown;
 
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      const res = await fetch(API_URL, { signal });
+      const res = (await fetch(API_URL, { signal })) as FetchResponse;
       if (!res.ok) {
         throw new Error(`dummyjson returned ${res.status}: ${res.statusText}`);
       }
